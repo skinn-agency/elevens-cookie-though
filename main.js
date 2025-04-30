@@ -57,6 +57,7 @@ function configStyles(theme) {
 }
 
 function updateConsent(prefs) {
+    debugger;
     var marketingEnabled = isCategoryEnabled(prefs, "marketing").toString();
     console.log("marketingEnabled", marketingEnabled);
     var statisticsEnabled = isCategoryEnabled(prefs, "statistics").toString();

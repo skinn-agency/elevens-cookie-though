@@ -8,7 +8,7 @@ export default defineConfig({
         terserOptions: {
             compress: {
                 drop_console: false, // Remove console logs
-                drop_debugger: true, // Remove debugger statements
+                drop_debugger: false, // Remove debugger statements
             },
             format: {
                 comments: false, // Remove comments
@@ -23,7 +23,7 @@ export default defineConfig({
         rollupOptions: {
             output: [
                 {
-                    format: "cjs",
+                    //format: "cjs",
                     entryFileNames: "elevens-cookie-though.js",
                     compact: true,
                 },
