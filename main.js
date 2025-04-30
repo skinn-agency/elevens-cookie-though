@@ -60,19 +60,18 @@ function updateConsent(prefs) {
     var preferencesEnabled = cookiesEnabled(prefs, "preferences");
 
     var consent = {
-        ad_storage: "granted",
+        ad_storage: marketingEnabled,
         analytics_storage: statisticsEnabled,
         ad_user_data: marketingEnabled,
         ad_personalization: marketingEnabled,
         functionality_storage: preferencesEnabled,
         personalization_storage: preferencesEnabled,
         security_storage: "granted",
-        extra_prop: "xxxx",
     };
 
     gtag("consent", "update", consent);
     dataLayer.push({ event: "cookie_consent_update" });
-    console.log("Consent updated (2)", consent);
+    console.log("Consent updated", consent);
 }
 
 // ------------------------------------------------------------- GO
