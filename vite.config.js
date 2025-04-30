@@ -23,7 +23,7 @@ export default defineConfig({
         rollupOptions: {
             output: [
                 {
-                    format: "cjs",
+                    //format: "cjs",
                     entryFileNames: "elevens-cookie-though.js",
                     compact: true,
                 },
