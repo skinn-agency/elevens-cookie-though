@@ -8,7 +8,7 @@ export default defineConfig({
         terserOptions: {
             compress: {
                 drop_console: false, // Remove console logs
-                drop_debugger: false, // Remove debugger statements
+                drop_debugger: true, // Remove debugger statements
             },
             format: {
                 comments: false, // Remove comments
@@ -18,7 +18,7 @@ export default defineConfig({
         lib: {
             entry: resolve(__dirname, "main.js"),
             name: "ElevensCookieThough",
-            formats: ["iife"], // Ensure all formats are built
+            formats: ["iife"],
         },
         rollupOptions: {
             output: {

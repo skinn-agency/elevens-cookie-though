@@ -8,6 +8,7 @@ function isCategoryEnabled(prefs, category) {
     var tmp = prefs.cookieOptions.find((x) => x.id === category);
 
     const isEnabled = tmp && tmp.isEnabled;
+    // below needs to be written this way, just returning isEnabled doesn't work in IIFE or CJS mode 🤷‍♂️
     return isEnabled == true ? "granted" : "denied";
 }
 
@@ -81,12 +82,12 @@ function updateConsent(prefs) {
     if (window.gtag) {
         gtag("consent", "update", consent);
     } else {
-        console.log("No gtag found");
+        console.error("No gtag found");
     }
     if (window.dataLayer) {
         dataLayer.push({ event: "cookie_consent_update" });
     } else {
-        console.log("No dataLayer found");
+        console.error("No dataLayer found");
     }
     console.log("Consent updated", consent);
 }
@@ -110,8 +111,6 @@ if (
 }
 
 window.elevensMergedCookieOpions = opts;
-
-//console.log("Attach event listeneres foor Cookiethough");
 
 function startup() {
     console.log("Trying to initialize CookieThough", opts.config);
