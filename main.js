@@ -4,8 +4,8 @@ import shadowStyles from "./shadow-styles.scss?inline";
 import styles from "./styles.scss?inline";
 import deepMerge from "deepmerge";
 
-function cookiesEnabled(prefs, category) {
-    console.log("cookiesEnabled", prefs, category);
+function isCategoryEnabled(prefs, category) {
+    console.log("isCategoryEnabled", prefs, category);
     var tmp = prefs.cookieOptions.find((x) => x.id === category);
     console.log("tmp", tmp);
 
@@ -57,9 +57,12 @@ function configStyles(theme) {
 }
 
 function updateConsent(prefs) {
-    var marketingEnabled = cookiesEnabled(prefs, "marketing").toString();
-    var statisticsEnabled = cookiesEnabled(prefs, "statistics").toString();
-    var preferencesEnabled = cookiesEnabled(prefs, "preferences").toString();
+    var marketingEnabled = isCategoryEnabled(prefs, "marketing").toString();
+    console.log("marketingEnabled", marketingEnabled);
+    var statisticsEnabled = isCategoryEnabled(prefs, "statistics").toString();
+    console.log("statisticsEnabled", statisticsEnabled);
+    var preferencesEnabled = isCategoryEnabled(prefs, "preferences").toString();
+    console.log("preferencesEnabled", preferencesEnabled);
 
     if (
         typeof marketingEnabled !== "string" ||
