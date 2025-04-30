@@ -5,9 +5,11 @@ import styles from "./styles.scss?inline";
 import deepMerge from "deepmerge";
 
 function cookiesEnabled(prefs, category) {
+    console.log("cookiesEnabled", prefs, category);
     var tmp = prefs.cookieOptions.find((x) => x.id === category);
-    if (tmp && tmp.isEnabled) return "granted";
-    else return "denied";
+    console.log("tmp", tmp);
+
+    return tmp && tmp.isEnabled ? "granted" : "denied";
 }
 
 function configStyles(theme) {
