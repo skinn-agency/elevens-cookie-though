@@ -18,12 +18,12 @@ export default defineConfig({
         lib: {
             entry: resolve(__dirname, "main.js"),
             name: "ElevensCookieThough",
-            //formats: ["cjs"], // Ensure all formats are built
+            formats: ["cjs"], // Ensure all formats are built
         },
         rollupOptions: {
             output: [
                 {
-                    //format: "cjs",
+                    format: "cjs",
                     entryFileNames: "elevens-cookie-though.js",
                     compact: true,
                 },
