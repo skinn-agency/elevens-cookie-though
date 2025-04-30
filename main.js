@@ -47,18 +47,25 @@ function configStyles(theme) {
     document.documentElement.style.setProperty("--elevens-ct-text-color", theme.textColor);
     document.documentElement.style.setProperty("--elevens-ct-bg-color", theme.bgColor);
     document.documentElement.style.setProperty("--elevens-ct-border-radius", theme.borderRadius);
-    document.documentElement.style.setProperty("--elevens-ct-button-border-radius", theme.buttonBorderRadius);
+    document.documentElement.style.setProperty(
+        "--elevens-ct-button-border-radius",
+        theme.buttonBorderRadius
+    );
     document.documentElement.style.setProperty("--elevens-ct-button-padding", theme.buttonPadding);
 }
 
 function updateConsent(prefs) {
+    var marketingEnabled = cookiesEnabled(prefs, "marketing");
+    var statisticsEnabled = cookiesEnabled(prefs, "statistics");
+    var preferencesEnabled = cookiesEnabled(prefs, "preferences");
+
     var consent = {
-        ad_storage: cookiesEnabled(prefs, "marketing"),
-        analytics_storage: cookiesEnabled(prefs, "statistics"),
-        ad_user_data: cookiesEnabled(prefs, "marketing"),
-        ad_personalization: cookiesEnabled(prefs, "marketing"),
-        functionality_storage: cookiesEnabled(prefs, "preferences"),
-        personalization_storage: cookiesEnabled(prefs, "preferences"),
+        ad_storage: marketingEnabled,
+        analytics_storage: statisticsEnabled,
+        ad_user_data: marketingEnabled,
+        ad_personalization: marketingEnabled,
+        functionality_storage: preferencesEnabled,
+        personalization_storage: preferencesEnabled,
         security_storage: "granted",
     };
 
@@ -71,11 +78,18 @@ function updateConsent(prefs) {
 const opts = deepMerge(defaultOptions, window.elevensCookieThough || {});
 
 // Custom merge with overwrite for policies
-if(window.elevensCookieThough.config.policies && window.elevensCookieThough.config.policies.length > 0) {
-    const overwriteMerge = (destinationArray, sourceArray, options) => sourceArray
-    opts.config.policies = deepMerge(defaultOptions.config.policies, window.elevensCookieThough.config.policies || {}, {
-        arrayMerge: overwriteMerge
-    });
+if (
+    window.elevensCookieThough.config.policies &&
+    window.elevensCookieThough.config.policies.length > 0
+) {
+    const overwriteMerge = (destinationArray, sourceArray, options) => sourceArray;
+    opts.config.policies = deepMerge(
+        defaultOptions.config.policies,
+        window.elevensCookieThough.config.policies || {},
+        {
+            arrayMerge: overwriteMerge,
+        }
+    );
 }
 
 window.elevensMergedCookieOpions = opts;
