@@ -7,7 +7,8 @@ import deepMerge from "deepmerge";
 function isCategoryEnabled(prefs, category) {
     var tmp = prefs.cookieOptions.find((x) => x.id === category);
 
-    return tmp && tmp.isEnabled ? "granted" : "denied";
+    const isEnabled = tmp && tmp.isEnabled;
+    return isEnabled == true ? "granted" : "denied";
 }
 
 function configStyles(theme) {
