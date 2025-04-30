@@ -5,9 +5,7 @@ import styles from "./styles.scss?inline";
 import deepMerge from "deepmerge";
 
 function isCategoryEnabled(prefs, category) {
-    console.log("isCategoryEnabled", prefs, category);
     var tmp = prefs.cookieOptions.find((x) => x.id === category);
-    console.log("tmp", tmp);
 
     return tmp && tmp.isEnabled ? "granted" : "denied";
 }
@@ -59,11 +57,8 @@ function configStyles(theme) {
 function updateConsent(prefs) {
     debugger;
     var marketingEnabled = isCategoryEnabled(prefs, "marketing").toString();
-    console.log("marketingEnabled", marketingEnabled);
     var statisticsEnabled = isCategoryEnabled(prefs, "statistics").toString();
-    console.log("statisticsEnabled", statisticsEnabled);
     var preferencesEnabled = isCategoryEnabled(prefs, "preferences").toString();
-    console.log("preferencesEnabled", preferencesEnabled);
 
     if (
         typeof marketingEnabled !== "string" ||
