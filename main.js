@@ -60,7 +60,7 @@ function updateConsent(prefs) {
     var preferencesEnabled = cookiesEnabled(prefs, "preferences");
 
     var consent = {
-        ad_storage: marketingEnabled,
+        ad_storage: "granted",
         analytics_storage: statisticsEnabled,
         ad_user_data: marketingEnabled,
         ad_personalization: marketingEnabled,
