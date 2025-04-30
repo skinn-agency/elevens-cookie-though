@@ -55,9 +55,17 @@ function configStyles(theme) {
 }
 
 function updateConsent(prefs) {
-    var marketingEnabled = cookiesEnabled(prefs, "marketing");
-    var statisticsEnabled = cookiesEnabled(prefs, "statistics");
-    var preferencesEnabled = cookiesEnabled(prefs, "preferences");
+    var marketingEnabled = cookiesEnabled(prefs, "marketing").toString();
+    var statisticsEnabled = cookiesEnabled(prefs, "statistics").toString();
+    var preferencesEnabled = cookiesEnabled(prefs, "preferences").toString();
+
+    if (
+        typeof marketingEnabled !== "string" ||
+        typeof statisticsEnabled !== "string" ||
+        typeof preferencesEnabled !== "string"
+    ) {
+        throw new Error("Consent values must be strings");
+    }
 
     var consent = {
         ad_storage: marketingEnabled,
@@ -69,8 +77,16 @@ function updateConsent(prefs) {
         security_storage: "granted",
     };
 
-    gtag("consent", "update", consent);
-    dataLayer.push({ event: "cookie_consent_update" });
+    if (window.gtag) {
+        gtag("consent", "update", consent);
+    } else {
+        console.log("No gtag found");
+    }
+    if (window.dataLayer) {
+        dataLayer.push({ event: "cookie_consent_update" });
+    } else {
+        console.log("No dataLayer found");
+    }
     console.log("Consent updated", consent);
 }
 

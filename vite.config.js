@@ -18,7 +18,7 @@ export default defineConfig({
         lib: {
             entry: resolve(__dirname, "main.js"),
             name: "ElevensCookieThough",
-            formats: ["cjs"], // Ensure all formats are built
+            //formats: ["cjs"], // Ensure all formats are built
         },
         rollupOptions: {
             output: [
