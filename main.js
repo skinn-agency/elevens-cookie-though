@@ -5,7 +5,12 @@ import styles from "./styles.scss?inline";
 import deepMerge from "deepmerge";
 
 function isCategoryEnabled(prefs, category) {
-    var tmp = prefs.cookieOptions.find((x) => x.id === category);
+    var tmp;
+    prefs.cookieOptions.forEach((x) => {
+        if (x.id === category) {
+            tmp = x;
+        }
+    });
 
     return tmp && tmp.isEnabled ? "granted" : "denied";
 }
