@@ -67,11 +67,12 @@ function updateConsent(prefs) {
         functionality_storage: preferencesEnabled,
         personalization_storage: preferencesEnabled,
         security_storage: "granted",
+        extra_prop: "xxxx",
     };
 
     gtag("consent", "update", consent);
     dataLayer.push({ event: "cookie_consent_update" });
-    console.log("Consent updated", consent);
+    console.log("Consent updated (2)", consent);
 }
 
 // ------------------------------------------------------------- GO
